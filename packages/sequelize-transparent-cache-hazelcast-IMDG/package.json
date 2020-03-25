@@ -1,0 +1,25 @@
+{
+  "name": "sequelize-transparent-cache-hazelcast-imdg",
+  "version": "1.0.0",
+  "description": "Sequalize cache adapter for hazelcast IMDG",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SiddhantJ19/sequelize-transparent-cache.git"
+  },
+  "keywords": [
+    "hazelcast",
+    "imdg",
+    "sequalize",
+    "cache"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SiddhantJ19/sequelize-transparent-cache/issues"
+  },
+  "homepage": "https://github.com/SiddhantJ19/sequelize-transparent-cache#readme"
+}
