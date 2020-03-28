@@ -23,5 +23,8 @@
 			"plugin:jest/recommended",
 			"standard"
 		]
+	},
+	"dependencies": {
+		"hazelcast-client": "^3.12.2"
 	}
 }

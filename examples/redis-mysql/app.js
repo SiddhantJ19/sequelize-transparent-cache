@@ -1,15 +1,15 @@
-const Redis = require('ioredis')
+const Redis = require('ioredis') // 1 imdg nodejs client
 const redis = new Redis()
 
 const RedisAdaptor = require('../../packages/sequelize-transparent-cache-ioredis')
-const redisAdaptor = new RedisAdaptor({
+const redisAdaptor = new RedisAdaptor({ // 2 imdg adapter with multiple config options
   client: redis,
   namespace: 'model',
   lifetime: 60 * 60
 })
 
 const sequelizeCache = require('../../packages/sequelize-transparent-cache')
-const { withCache } = sequelizeCache(redisAdaptor)
+const { withCache } = sequelizeCache(redisAdaptor) // 3 common interface, extending methods for withcache
 
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize('database', 'user', 'password', {
@@ -21,16 +21,8 @@ const sequelize = new Sequelize('database', 'user', 'password', {
 // Register and wrap your models:
 // withCache() will add cache() methods to all models and instances in sequelize v4
 const user = sequelize.import('./models/user')
-const grand = sequelize.import('./models/grand')
-const parent = sequelize.import('./models/parent')
-
-user.associate(parent)
-parent.associate(user, grand)
-grand.associate(parent)
 
 const User = withCache(user)
-const Parent = withCache(parent)
-const Grand = withCache(grand)
 
 async function start () {
   await sequelize.sync()
@@ -67,15 +59,7 @@ async function start () {
   // })
 
   // Cache result of arbitrary query - requires cache key
-  const val = await Grand.cache('dan-user21').findAll({
-    include: [{
-      model: Parent,
-      include: [{ model: User, required: true }],
-    }],
-    where: { id: 3 }
-  })
 
-  console.log('value', val[0].Parent)
   process.exit()
 }
 
